@@ -64,7 +64,7 @@ public class MysqlUtil {
             stmt.setString(1,name);
             ResultSet rs =stmt.executeQuery();
             if(rs.next())
-                result=rs.getString("sim");
+            result=rs.getString("sim");
         }catch (SQLException e){
             System.out.println("查询有误");
         }

@@ -1,6 +1,9 @@
+var mapechart=echarts.init(document.getElementById('map'));
 
 var data = [
-    {name: '大庆', value: 279}
+    //格式{name:'省份',value:'访问数'}
+    {name: '河南', value: 279},
+    {name:'北京',value:800}
 ];
 
 var geoCoordMap = {
@@ -44,7 +47,7 @@ var convertData = function (data) {
         if (geoCoord) {
             res.push({
                 name: data[i].name,
-                value: geoCoord.concat(data[i].value)
+                value: geoCoord.concat(data[i].value/2)
             });
         }
     }
@@ -61,7 +64,45 @@ option = {
         }
     },
     tooltip : {
-        trigger: 'item'
+        trigger: 'axis',
+        formatter: function (params, ticket, callback) {
+        return params.name+":"+params.value[2];
+         }
+//          {
+//     componentType: 'series',
+//     // 系列类型
+//     seriesType: string,
+//     // 系列在传入的 option.series 中的 index
+//     seriesIndex: number,
+//     // 系列名称
+//     seriesName: string,
+//     // 数据名，类目名
+//     name: string,
+//     // 数据在传入的 data 数组中的 index
+//     dataIndex: number,
+//     // 传入的原始数据项
+//     data: Object,
+//     // 传入的数据值
+//     value: number|Array,
+//     // 数据图形的颜色
+//     color: string,
+
+//     // 饼图的百分比
+//     percent: number,
+
+//     // 
+//     galleryViewPath: ,
+
+//     // 
+//     galleryEditorPath: ,
+
+//     // 
+//     imagePath: ,
+
+//     // 
+//     gl: ,
+
+// }
     },
     bmap: {
         center: [104.114129, 37.550339],
@@ -207,7 +248,7 @@ option = {
             coordinateSystem: 'bmap',
             data: convertData(data),
             symbolSize: function (val) {
-                return val[2] / 10;
+                return val[2] /10;
             },
             label: {
                 normal: {
@@ -216,6 +257,7 @@ option = {
                     show: false
                 },
                 emphasis: {
+                    formatter:'{b}',
                     show: true
                 }
             },
@@ -233,7 +275,7 @@ option = {
                 return b.value - a.value;
             }).slice(0, 6)),
             symbolSize: function (val) {
-                return val[2] / 10;
+                return val[2] /10;
             },
             showEffectOn: 'emphasis',
             rippleEffect: {
@@ -259,7 +301,6 @@ option = {
         {
             type: 'custom',
             coordinateSystem: 'bmap',
-            renderItem: renderItem,
             itemStyle: {
                 normal: {
                     opacity: 0.5
@@ -267,8 +308,9 @@ option = {
             },
             animation: false,
             silent: true,
-            data: [0],
+            data: [1],
             z: -10
         }
     ]
 };
+mapechart.setOption(option);
