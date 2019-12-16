@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://node03:3306/Logsys?useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    hbase:
+      quorum: node01,node02,node03
+      rootDir: /hbase
+      nodeParent: /hbase
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    static-path-pattern: /**
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.zut.edu.logcol.logcollecttion.bean
+
+

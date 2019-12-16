@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zut.edu.logcol.logcollecttion.dao.mapper.LocSimMapper">
+    <resultMap id="SimLocMap" type="cn.zut.edu.logcol.logcollecttion.bean.LocSim">
+        <result  column="tol" property="tol" />
+        <result  column="sim" property="sim" />
+    </resultMap>
+    <select id="getloc" resultMap="SimLocMap" parameterType="java.lang.String">
+        SELECT * FROM province WHERE sim = #{sim}
+    </select>
+</mapper>
