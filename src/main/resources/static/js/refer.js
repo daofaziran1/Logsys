@@ -1,11 +1,19 @@
-
-var mapechart=echarts.init(document.getElementById('map'));
+function createcricle(locs){
+var mapechart=echarts.init(document.getElementById('cricle'));
 var data=[];
+
+for(loc of locs){
+    var t={name:'',value:0};
+    t.name=loc.location;
+    t.value=loc.num;
+    data.push(t);
+}
 function  get1(data){
     var dt=[];
     for(d of data ){
         dt.push(d.name);
     }
+    return dt;
 }
 option = {
     title : {
@@ -20,7 +28,7 @@ option = {
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: get1(window.data)
+        data: get1(data)
     },
     series : [
         {
@@ -28,7 +36,7 @@ option = {
             type: 'pie',
             radius : '55%',
             center: ['50%', '60%'],
-            data: window.data,
+            data: data,
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -42,3 +50,4 @@ option = {
 
 
 mapechart.setOption(option);
+}
