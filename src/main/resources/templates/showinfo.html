@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>showinfo</title>
+    <script type="text/javascript" src="./js/map.js"></script>
     <script type="text/javascript" src="./js/jquery.js"></script>
     <script type="text/javascript" src="./js/echarts.min.js"></script>
     <script type="text/javascript" src="./js/bmap.min.js"></script>
@@ -15,7 +16,6 @@
 <script type="text/javascript" th:inline="javascript">
     var myChart = echarts.init(document.getElementById('main'));
     var locs=[[${locations}]];
-    console.dir(locs);
     option = {
         xAxis: {
             data: [],
@@ -35,7 +35,8 @@
         option.series[0].data.push(loc.num);
     }
     myChart.setOption(option);
+    createmap(locs);
 </script>
-<script type="text/javascript" src="./js/map.js"></script>
+
 </body>
 </html>

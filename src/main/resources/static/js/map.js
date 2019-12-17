@@ -1,11 +1,15 @@
+function createmap(locs){
 var mapechart=echarts.init(document.getElementById('map'));
-
 var data = [
     //格式{name:'省份',value:'访问数'}
-    {name: '河南', value: 279},
-    {name:'北京',value:800}
 ];
 
+for(loc of locs){
+    var t={name:'',value:0};
+    t.name=loc.location;
+    t.value=loc.num;
+    data.push(t);
+}
 var geoCoordMap = {
     '河南':[113.3,34.6],
     '北京':[116.395645,39.929986],
@@ -64,9 +68,10 @@ option = {
         }
     },
     tooltip : {
-        trigger: 'axis',
+        trigger: 'item',
         formatter: function (params, ticket, callback) {
-        return params.name+":"+params.value[2];
+            console.dir(params);
+        return params.seriesName+"<br />"+params.marker+params.name+":"+params.value[2];
          }
 //          {
 //     componentType: 'series',
@@ -314,3 +319,4 @@ option = {
     ]
 };
 mapechart.setOption(option);
+}
